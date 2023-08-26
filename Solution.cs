@@ -80,6 +80,11 @@ public class Solution
 				breaksTaken++;
 			}
 		}
+
+		if (minutesPast < 60)
+		{
+			throw new TimeNotUsedException();
+		}
 	}
 
 	private void ProcessMinute()

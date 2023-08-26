@@ -8,15 +8,20 @@ try
 	const int minBreakLength = 1;
 	const int maxBreakLength = 20;
 	var solutions = new List<Solution>();
+	
+	// solutions.Add(new Solution(2, new List<int?> { 5, 2, 3, 4, 1, null, 2, 3, 5, 4, 1, 2, 3, null }, new[] { 3, 11 }, log));
+
 	for (int i = minBreakLength; i <= maxBreakLength; i++)
 	{
+		solutions.Add(new Solution(1, new List<int?> { 1, 5, 4, 3, 2, 5, 4, null, 1 }, new[] { i }, log));
+	
 		for (int j = minBreakLength; j <= maxBreakLength; j++)
 		{
+			solutions.Add(new Solution(2, new List<int?> { 5, 2, 3, 4, 1, null, 2, 3, 5, 4, 1, 2, 3, null }, new[] { i, j }, log));
+			solutions.Add(new Solution(3, new List<int?> { 5, 3, 2, 1, null, 3, 2, 5, 1, 3, 2, null, 5 }, new[] { i, j }, log));
+	
 			for (int k = minBreakLength; k <= maxBreakLength; k++)
 			{
-				solutions.Add(new Solution(1, new List<int?> { 1, 5, 4, 3, 2, 5, 4, null, 1 }, new[] { i }, log));
-				solutions.Add(new Solution(2, new List<int?> { 5, 2, 3, 4, 1, null, 2, 3, 5, 4, 1, 2, 3, null }, new[] { i, j }, log));
-				solutions.Add(new Solution(3, new List<int?> { 5, 3, 2, 1, null, 3, 2, 5, 1, 3, 2, null, 5 }, new[] { i, j }, log));
 				solutions.Add(new Solution(4, new List<int?> { null, 2, 4, 1, 5, 3, null, 1, 2, 1, 3, 1, 5, null }, new[] { i, j, k }, log));
 			}
 		}
@@ -33,7 +38,7 @@ try
 		try
 		{
 			solution.Process();
-			
+
 			workingSolutions.Add(solution);
 			if (log)
 			{
@@ -52,6 +57,13 @@ try
 			if (log)
 			{
 				Console.WriteLine("A break was not used completely");
+			}
+		}
+		catch (TimeNotUsedException)
+		{
+			if (log)
+			{
+				Console.WriteLine("The hour was not used completely");
 			}
 		}
 	}
